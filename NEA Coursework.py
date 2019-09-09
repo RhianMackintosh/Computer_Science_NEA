@@ -16,7 +16,7 @@ cursor.execute('''INSERT INTO users (id,username,password,security,first_name,la
 class Authentication():
     #def __init__(self):
 
-    def Login():
+    def LogIn():
         matching = False
         while matching == False:
             L_username = input("Enter your username: ")
@@ -36,10 +36,50 @@ class Authentication():
                     pass
                 else:
                     pass
-            if matching == False:
+            if not matching:
                 print("Username or password incorrect, please try again (error 1)")
 
-Authentication.Login()
+    def SignUp():
+
+        N_username = input("Enter a username: ")
+        taken = True
+        while taken:
+            cursor.execute('''SELECT username FROM users''')
+            for row in cursor:
+                if row[0] == N_username:
+                    taken = True
+                    N_username = input("Username taken please try again: ")
+                    break
+                else:
+                    taken = False
+        matching = False
+        while not matching:
+            N_password = input("Enter your password: ")
+            N_pass = input("Enter password again: ")
+            if N_password == N_pass:
+                matching = True
+            else:
+                print("Passwords do not match please try again: ")
+
+        print("\nPlease enter your details: ")
+        N_name = input("First name: ")
+        N_lastname = input("Last name: ")
+        N_security = input("Mothers maiden name: ")
+        N_code = input("(if applicable) Compnay code: ")
+        if N_code == '':
+            N_code = 'None'
+
+        cursor.execute('''SELECT MAX(id) FROM users''')
+        for row in cursor:
+            last_id = row[0]
+        last_id += 1
+
+        cursor.execute('''INSERT INTO users (id,username,password,security,first_name,last_name,company_code) VALUES (?,?,?,?,?,?,?)''',(last_id,N_username,N_password,N_security,N_name,N_lastname,N_code))
+        print("\nSign up complete you will now be taken to the log in page.\n")
+        Authentication.LogIn()
+
+
+Authentication.SignUp()
 
 '''
 #intial window
