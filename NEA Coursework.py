@@ -1,21 +1,25 @@
 #Computer science NEA main program
 
 import sqlite3
+import os
 
 
 db = sqlite3.connect("Companies.db")
 cursor = db.cursor()
 
-cursor.execute('''DROP TABLE companies''')
-cursor.execute('''DROP TABLE ras2019''')
-cursor.execute('''DROP TABLE hgs2019''')
+#cursor.execute('''DROP TABLE companies''')
+#cursor.execute('''DROP TABLE ras2019''')
+#cursor.execute('''DROP TABLE hgs2019''')
 
-cursor.execute('''CREATE TABLE companies (id INT, name STRING, code STRING, no_users INT, no_admin INT)''')
-cursor.execute('''CREATE TABLE ras2019 (id INT, username STRING, password STRING, security STRING, first_name STRING, last_name STRING, level INT)''')
-cursor.execute('''CREATE TABLE hgs2019 (id INT, username STRING, password STRING, security STRING, first_name STRING, last_name STRING, level INT)''')
+cursor.execute('''CREATE TABLE IF NOT EXISTS companies (id INT, name STRING, code STRING, no_users INT, no_admin INT, admin_code STRING)''')
+cursor.execute('''CREATE TABLE IF NOT EXISTS ras2019 (id INT, username STRING, password STRING, security STRING, first_name STRING, last_name STRING, level INT)''')
+cursor.execute('''CREATE TABLE IF NOT EXISTS hgs2019 (id INT, username STRING, password STRING, security STRING, first_name STRING, last_name STRING, level INT)''')
 
-cursor.execute('''INSERT INTO companies (id,name,code,no_users,no_admin) VALUES (1,"Ralph Allen School","ras2019",1,2)''')
-cursor.execute('''INSERT INTO companies (id,name,code,no_users,no_admin) VALUES (2,"Haysfield Girls School","hgs2019",1,3)''')
+cursor.execute('''CREATE TABLE IF NOT EXISTS projects (project_id INT, company_name STRING, users STRING)''')
+
+
+cursor.execute('''INSERT INTO companies (id,name,code,no_users,no_admin,admin_code) VALUES (1,"Ralph Allen School","ras2019",1,2,1111)''')
+cursor.execute('''INSERT INTO companies (id,name,code,no_users,no_admin,admin_code) VALUES (2,"Haysfield Girls School","hgs2019",1,3,1111)''')
 
 cursor.execute('''INSERT INTO ras2019 (id,username,password,security,first_name,last_name,level) VALUES (1,"rhianmack","1234","Storkey","Rhian","Mackintosh",1)''')
 cursor.execute('''INSERT INTO hgs2019 (id,username,password,security,first_name,last_name,level) VALUES (2,"milliel","1111","Lisney","Millie","Lisney",2)''')
@@ -24,11 +28,13 @@ cursor.execute('''INSERT INTO hgs2019 (id,username,password,security,first_name,
 
 def Menu():
     code = input("Enter company code or press '#' to register a company: ")
-    if code == '#':
-        Register()
-    else:
-        a = False
-        while not a:
+
+    a = False
+    while not a:
+        if code == '#':
+            Register()
+            a = True
+        else:
             cursor.execute('''SELECT code FROM companies''')
             for row in cursor:
                 if row[0] == code:
@@ -105,13 +111,16 @@ def SignUp(code):
         last_id = row[0]
     last_id += 1
 
-    cursor.execute('''INSERT INTO '''+code+''' (id,username,password,security,first_name,last_name,level) VALUES (?,?,?,?,?,?,?)''',(last_id,N_username,N_password,N_security,N_name,N_lastname,N_level))
+    cursor.execute('''INSERT INTO '''+code+''' (id,username,password,security,first_name,last_name,level) VALUES (?,?,?,?,?,?)''',(last_id,N_username,N_password,N_security,N_name,N_lastname,N_level))
     print("\nSign up complete you will now be taken to the log in page.\n")
     LogIn()
 
+
 def Register():
     name = input("Enter full company name: ")
-    admin = input("How many admin accounts will you require?: ")
+
+    admin_code = os.urandom(5)
+
     code = input("Enter a company code: ")
 
     cursor.execute('''SELECT MAX(id) FROM companies''')
@@ -119,7 +128,7 @@ def Register():
         last_id = row[0]
     last_id += 1
 
-    cursor.execute('''INSERT INTO companies (id, name, code, no_users, no_admin) VALUES (?,?,?,?,?)''',(last_id,name,code,0,admin))
+    cursor.execute('''INSERT INTO companies (id, name, code, no_users, admin_code) VALUES (?,?,?,?,?)''',(last_id,name,code,0,admin_code))
 
     print("Company registered, you will now be take to sign up your first user")
     SignUp(code)
