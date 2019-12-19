@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- If there is a title give, use the first statement, if not use the default -->
+    <meta charset="UTF-8">
+    {% if title %}
+        <title>{{ title }}: Project Management</title>
+    {% else %}
+        <title>Project Management</title>
+    {% endif %}
+</head>
+<body>
+    <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
+        <a class="navbar-brand" href="#">Project Management</a>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+
+                <il class="nav-item">
+                    <a href="\" class="nav-link">Log On</a>
+                </il>
+            </ul>
+        </div>
+    </nav>
+<br><br><br>
+	<div class="container">
+		<br>
+		<h4>{{ title }} has logged out</h4>
+		<br>
+        <br><a href="\">Click here to Log back in</a>
+	</div>
+</body>

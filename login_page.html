@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <!-- If there is a title give, use the first statement, if not use the default -->
+    <meta charset="UTF-8">
+    {% if title %}
+        <title>Project management - {{ title }}</title>
+    {% else %}
+        <title>Project management</title>
+    {% endif %}
+
+    <style>
+        .bd-placeholder-img{
+        font-size: 1.125rem;
+        text-anchor: middle;
+        }
+    </style>
+    <link href="login_page.css" rel="stylesheet">
+
+</head>
+
+<body class="text-center">
+	<div class="container">
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <br>
+        <div class="row">
+            <div class="col">
+                <h4>Please Login</h4>
+            </div>
+        </div>
+        <br>
+        <form action="" class="form-group" method="post">
+            <div class="row">
+                <div class="col-4 mx-auto">
+                    <input type="text" class="form-control" placeholder = "Username" name="username" value="{{request.form.username}}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-4 mx-auto">
+                    <input type="password" class="form-control" placeholder = "Password" name="password" value="{{request.form.password}}">
+                </div>
+            </div>
+            <div class="row">
+                <div class="col">
+                    <a href="/signup" class="text-reset">New user? Sign up here</a>
+                </div>
+            </div>
+            <br>
+            <div class="row">
+                <div class="col">
+                    <input class="btn btn-primary" type="submit" value="Login">
+                </div>
+            </div>
+        </form>
+        <P>{{Error}}</P>
+        </div>
+	</div>
+</body>

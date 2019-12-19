@@ -1,0 +1,14 @@
+{% extends 'layout.html' %}
+{% block content %}
+
+    <h1>-</h1>
+    <h1>Display page</h1>
+{% for post in posts %}
+    <h2>{{ post }}</h2>
+    {% for item in post %}
+        </h3>{{ item }}</h3><br>
+    {% endfor %}
+{% endfor %}
+
+{% endblock content %}
+

@@ -16,15 +16,34 @@
     {% endif %}
 </head>
 <body>
-    <nav class="navbar navbar-light bg-light">
-        <a class=""navbar-brand" href="#">Project Management</a>
-        <ul class="navbar-nav">
-            <il class="nav-item">
-                <a href="#" class="nav-link">tasks</a>
-            </il>
-        </ul>
+    <nav class="navbar navbar-expand-md fixed-top navbar-dark bg-dark">
+        <a class="navbar-brand" href="/calendar" class="nav-link">Project Management</a>
+        <div class="collapse navbar-collapse" id="navbarCollapse">
+            <ul class="navbar-nav mr-auto">
+                <il class="nav-item">
+                    <a href="/calendar" class="nav-link">Calendar</a>
+                </il>
+                <il class="nav-item">
+                    <a href="/notes" class="nav-link">Notes</a>
+                </il>
+                <il class="nav-item">
+                    <a href="/stats" class="nav-link">Statistics</a>
+                </il>
+            </ul>
+             <ul class="nav navbar-nav navbar-right">
+                <il class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" id="navbarDropdown" role="button" data-toggle="dropdown" aria-expanded="false">My Account</a>
+                    <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+                        <a class="dropdown-item" href="/settings" class="nav-link">View account</a>
+                        <a class="dropdown-item" href="/login" class="nav-link">Log out</a>
+                    </div>
+                </il>
+            </ul>
+        </div>
     </nav>
+
     <div class="'container">
+        { padding-top: 150px; }
     {% block content%}{% endblock%} <!-- The content from the pages will go here -->
     </div>
 

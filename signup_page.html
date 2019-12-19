@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+    <style>
+        .bd-placeholder-img{
+        font-size: 1.125rem;
+        text-anchor: middle;
+        }
+    </style>
+    <link href="login_page.css" rel="stylesheet">
+
+</head>
+
+<body>
+	<div class="container">
+		<br>
+		<h4>Sign Up</h4>
+        <br>
+		<form action="" method="post">
+			<div class="form-group">
+				<big class="form-text">Personal information</big>
+				<div class="row">
+					<div class="col">
+						<input type="text" class="form-control" name="firstname" placeholder="First Name" value="{{request.form.fname}}">
+					</div>
+					<div class="col">
+						<input type="text" class="form-control" name="surname" placeholder="Surname" value="{{request.form.sname}}">
+					</div>
+				</div>
+				<br>
+				<div class="row">
+					<div class="col">
+						<select class="form-control" name="title">
+							{% autoescape off %}
+								{% for title in titles %}
+									{{title}}
+								{% endfor %}
+							{% endautoescape %}
+						</select>
+					</div>
+					<div class="col">
+						<input type="text" class="form-control" name="knownas" placeholder="Know as name" value="{{request.form.knownas}}">
+						<small id="knownas" class="form-text text-muted">This is what will be displayed to other users. </small>
+					</div>
+				</div>
+			</div>
+
+			<!-- Form group for account infomation -->
+			<big class="form-text">Account infomation</big>
+			<div class="form-group">
+				<div class="row">
+					<div class="col">
+						<select class="form-control" name="securityq">
+							{% autoescape off %}
+								{% for question in questions %}
+									{{question}}
+								{% endfor %}
+							{% endautoescape %}
+						</select>
+					</div>
+					<div class="col">
+						<input type="text" class="form-control" name="securitya" placeholder="Answer" value="{{request.form.secuirtya}}">
+					</div>
+				</div>
+				<br>
+				<div class="row">
+					<div class="col-6 mx-auto">
+						<input type="text" class="form-control" name="username" placeholder="Username" value="{{request.form.uname}}">
+						<small>{{ErrorUser}}</small>
+					</div>
+				</div>
+				<br>
+				<div class="row">
+					<div class="col">
+						<input type="password" class="form-control" name="password" placeholder="Password" value="{{request.form.password}}">
+					</div>
+					<div class="col">
+						<input type="password" class="form-control" name="confirm" placeholder="Confirm password" value="{{request.form.confirm}}">
+						<small>{{ErrorPassword}}</small>
+					</div>
+				</div>
+			</div>
+			<br>
+			<br>
+			<small>{{ErrorEmpty}}</small>
+			<div class="row">
+				<div class="col-1 mx-auto">
+					<button type="submit" class="btn btn-primary">Submit</button>
+				</div>
+			</div>
+			<div class="row">
+				<div class="col-3 mx-auto">
+					<a href="/login">Existing user? Log in here</a>
+				</div>
+			</div>
+			</form>
+
+	</div>
+</body>
